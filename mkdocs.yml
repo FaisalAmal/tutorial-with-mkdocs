@@ -1,0 +1,47 @@
+site_name: Kenali_bUMI
+theme:
+  name: material
+  palette:
+    primary: black
+  features:
+    - content.code.copy
+    - search.suggest
+  custom_dir: overrides
+  icon:
+    social:
+      - fontawesome/brands/github
+      - fontawesome/solid/envelope
+      - fontawesome/brands/linkedin
+  pygments_style: default
+nav:
+  - Home: index.md
+  - About: about.md
+  - Python:
+    - Basics:
+      - Basic Geology Tools: python/basics/Basic Geology Tools.md
+    - Intermediate:
+      - Empty: python/intermediate/none.md
+    - Advanced:
+      - DrillHole Data Automation: python/advanced/Automation for DrillHole Database.md
+      - 3D Geological Model with Gempy: python/advanced/3D Geological Model with Gempy.md
+  - Geology:
+    - Geology Structure:
+      - Empty: geology/geology structure/none.md
+    - Petrology:
+      - Empty: geology/petrology/none.md
+  - Resources: resources.md
+extra_css:
+  - extra/custom.css
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/FaisalAmal
+    - icon: fontawesome/solid/envelope
+      link: mailto:your.email@example.com
+    - icon: fontawesome/brands/linkedin
+      link: https://linkedin.com/in/faisal-amal-974004202
+markdown_extensions:
+  - pymdownx.highlight:
+      linenums: false  # Enable line numbers
+      use_pygments: true  # Use Pygments for highlighting
+  - pymdownx.superfences  # Enhanced code block rendering
