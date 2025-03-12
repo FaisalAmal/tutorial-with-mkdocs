@@ -1,0 +1,45 @@
+.md-footer {
+    background-color: black;
+}
+
+.md-footer-meta {
+    background-color: rgba(0,0,0,0.87);
+}
+
+.footer-social {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    padding: 1rem 0;
+}
+
+.footer-social a {
+    color: white;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.footer-social a:hover {
+    color: var(--md-primary-fg-color);
+}
+
+.md-footer-copyright {
+    text-align: center;
+    margin: 1rem 0;
+    color: white;
+}
+
+.twemoji {
+    width: 1.2rem;
+    height: 1.2rem;
+    fill: currentColor;
+}
+
+/* Embed Video Styles*/
+.video-container {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0; /* Optional: Adds spacing around the video */
+}
