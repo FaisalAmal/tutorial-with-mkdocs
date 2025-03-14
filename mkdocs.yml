@@ -18,11 +18,11 @@ nav:
   - About: about.md
   - Python:
     - Basics:
-      - Basic Geology Tools: python/basics/Basic Geology Tools.md
+      - Membuat Topo dari Data Koordinat: python/basics/Membuat Topo dari Data Koordinat.md
     - Intermediate:
       - Empty: python/intermediate/none.md
     - Advanced:
-      - DrillHole Data Automation: python/advanced/Automation for DrillHole Database.md
+      - DrillHole Data Automation: python/advanced/Data Automation for DrillHole Database.md
       - 3D Geological Model with Gempy: python/advanced/3D Geological Model with Gempy.md
   - Geology:
     - Geology Structure:
@@ -30,6 +30,7 @@ nav:
     - Petrology:
       - Empty: geology/petrology/none.md
   - Resources: resources.md
+  - Support by: support.md  
 extra_css:
   - extra/custom.css
 extra:
@@ -37,7 +38,7 @@ extra:
     - icon: fontawesome/brands/github
       link: https://github.com/FaisalAmal
     - icon: fontawesome/solid/envelope
-      link: mailto:your.email@example.com
+      link: mailto:19721974asal@gmail.com
     - icon: fontawesome/brands/linkedin
       link: https://linkedin.com/in/faisal-amal-974004202
 markdown_extensions:

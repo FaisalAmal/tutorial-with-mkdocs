@@ -75,15 +75,18 @@ logger = logging.getLogger(__name__)
 daily_folder = r'Daily_Data'
 database_file = r'C:\Users\NamaPenggunaAnda\DrillHole_Automation\drilling_database.xlsx'
 ```
-- **Penjelasan:**
+**Penjelasan:**
+
   - `matplotlib.use('Agg')` mencegah error terkait GUI (misalnya, konflik dengan Tkinter) dengan menggunakan backend non-interaktif.
   - Flask digunakan untuk menampilkan data bebasis dashboard, pemantauan file (Watchdog), manipulasi Excel (OpenPyXL), analisis data (Pandas), dan visualisasi (Matplotlib).
   - Logging melacak operasi untuk debugging.
   - `daily_folder` dan `database_file` menentukan jalur file (sesuaikan `NamaPenggunaAnda` dengan nama pengguna Windows Anda atau gunakan `os.path.expanduser` untuk kompatibilitas lintas platform, misalnya, `os.path.expanduser('~') + '/DrillHole_Automation/drilling_database.xlsx'`).
 
 **Potensi eror:**
-- **Masalah penempatan folder:** Jika jalur `daily_folder` atau `database_file` tidak sesuai, Anda akan mendapatkan `FileNotFoundError`. Verifikasi jalur di File Explorer dan sesuaikan.
-- **Error Instalasi Library:** Potensi `pip install` gagal, pastikan ada akses internet atau periksa kompatibilitas versi Python.
+
+**Masalah penempatan folder:** Jika jalur `daily_folder` atau `database_file` tidak sesuai, Anda akan mendapatkan `FileNotFoundError`. Verifikasi jalur di File Explorer dan sesuaikan.
+
+**Error Instalasi Library:** Potensi `pip install` gagal, pastikan ada akses internet atau periksa kompatibilitas versi Python.
 
 ---
 
@@ -118,14 +121,17 @@ class Handler(FileSystemEventHandler):
             except Exception as e:
                 logger.error(f"Error memproses file {event.src_path}: {str(e)}")
 ```
-- **Penjelasan:**
+**Penjelasan:**
+
   - `Watcher` membuat `Observer` untuk memantau `daily_folder` secara continue.
   - `Handler` memantau pembuatan file, memfilter file `.xls` atau `.xlsx`, dan menjalankan `process_new_file` untuk mengolah file baru.
   - `time.sleep(1)` mencegah overload CPU; `KeyboardInterrupt` menutup sistem ketika mengalami overload or stuck.
 
 **Kemungkinan Eror:**
-- **Izin Ditolak:** Jika `Daily_Data` tidak memiliki izin baca/tulis, `Watchdog` gagal. Periksa izin folder di Windows Explorer.
-- **Penguncian File:** Jika file dibuka di Excel, `Watchdog` mungkin memicu sebelum file sepenuhnya diedit, menyebabkan `PermissionError`. Tambahkan `time.sleep(2)` di `process_new_file` untuk menunda pemrosesan.
+
+**Izin Ditolak:** Jika `Daily_Data` tidak memiliki izin baca/tulis, `Watchdog` gagal. Periksa izin folder di Windows Explorer.
+
+**Penguncian File:** Jika file dibuka di Excel, `Watchdog` mungkin memicu sebelum file sepenuhnya diedit, menyebabkan `PermissionError`. Tambahkan `time.sleep(2)` di `process_new_file` untuk menunda pemrosesan.
 
 ---
 
@@ -268,15 +274,19 @@ def append_to_database(transformed_rows):
         logger.error(f"Error menambahkan ke database: {str(e)}")
         raise
 ```
-- **Penjelasan:**
+**Penjelasan:**
+
   - `process_new_file`: Mengkoordini pengolahan data dan memastikan ketersediaan file.
   - `transform_data`: Membaca metadata (ID Lubang, Tanggal), memvalidasinya, dan mentransformasi data harian ke format database, menangani ketidaksesuaian header dengan indeks sebagai cadangan.
   - `append_to_database`: Memperbarui `drilling_database.xlsx`, menambahkan header jika diperlukan, memastikan konsistensi data.
 
 **Kemungkinan Eror:**
-- **Error Metadata:** Jika cell excel `B2` atau `J3` kosong, gunakan log untuk debugging dan buat ulang file jika rusak.
-- **Ketidaksesuaian Kolom:** Jika header berbeda, log akan menunjukkan nama kolom; sesuaikan `transform_data` untuk indeks atau header.
-- **Izin File:** Pastikan akses tulis ke `drilling_database.xlsx`, periksa melalui properti Windows Explorer.
+
+**Error Metadata:** Jika cell excel `B2` atau `J3` kosong, gunakan log untuk debugging dan buat ulang file jika rusak.
+
+**Ketidaksesuaian Kolom:** Jika header berbeda, log akan menunjukkan nama kolom; sesuaikan `transform_data` untuk indeks atau header.
+
+**Izin File:** Pastikan akses tulis ke `drilling_database.xlsx`, periksa melalui properti Windows Explorer.
 
 ---
 
@@ -426,16 +436,20 @@ def database_status():
     except Exception as e:
         return {'status': 'error', 'message': str(e)}, 500
 ```
-- **Penjelasan:**
+**Penjelasan:**
+
   - `load_database`: Memuat database untuk analisis.
   - `generate_recovery_plot`, `generate_material_distribution_plot`: Membuat visualisasi, dideskripsikan sebagai base64 untuk dashboard.
   - `DASHBOARD_TEMPLATE`: HTML dengan CSS untuk menampilkan dashboard, meliputi statistik dan plot.
   - Rute menangani tampilan dashboard, pembaruan manual, dan pemeriksaan status database.
 
 **Kemungkinan Eror:**
-- **Masalah Backend Matplotlib:** Jika `matplotlib.use('Agg')` dilewatkan, expect error threading. Pastikan ada di awal skrip.
-- **Error Memuat database:** Jika `drilling_database.xlsx` hilang atau salah format, `pd.read_excel` gagal. Verifikasi keberadaan dan format file.
-- **Error Rute Flask:** Pastikan metode HTTP benar; sesuaikan jika terjadi error 405, seperti yang terlihat dengan `/update`.
+
+**Masalah Backend Matplotlib:** Jika `matplotlib.use('Agg')` dilewatkan, expect error threading. Pastikan ada di awal skrip.
+
+**Error Memuat database:** Jika `drilling_database.xlsx` hilang atau salah format, `pd.read_excel` gagal. Verifikasi keberadaan dan format file.
+
+**Error Rute Flask:** Pastikan metode HTTP benar; sesuaikan jika terjadi error 405, seperti yang terlihat dengan `/update`.
 
 ---
 
@@ -449,33 +463,39 @@ if __name__ == '__main__':
     watcher_thread.start()
     app.run(host='127.0.0.1', port=5000)
 ```
-- **Penjelasan:**
+**Penjelasan:**
+
   - Menjalankan `Watcher` untuk pemantauan file pada folder yang telah ditentukan sebelumnya.
   - Meluncurkan Flask di `localhost:5000`, dapat diakses melalui browser untuk dashboard.
 
 **Kemungkinan Eror:**
-- **Konflik Port:** Jika anda sedang menjalankan 5000 sebagai lokal host untuk projek lain maka Flask tidak dapat mengunakan host tersebut. Ubah ke `app.run(host='127.0.0.1', port=5001)` atau hapus poject yang bersangkutan.
-- **Masalah Threading:** Jika `Watcher` atau Flask crash, periksa log untuk pengecualian, memastikan izin dan akses file yang tepat.
+**Konflik Port:** Jika anda sedang menjalankan 5000 sebagai lokal host untuk projek lain maka Flask tidak dapat mengunakan host tersebut. Ubah ke `app.run(host='127.0.0.1', port=5001)` atau hapus poject yang bersangkutan.
+
+**Masalah Threading:** Jika `Watcher` atau Flask crash, periksa log untuk pengecualian, memastikan izin dan akses file yang tepat.
 
 ---
 
 #### Langkah 3: Ujicoba dan Penanganan Masalah
 1. **Jalankan Skrip:**
-   - Buka Command Prompt di `DrillHole_Automation`, ketik `python data_updater.py`, dan tekan Enter.
-   - Periksa log untuk konfirmasi (misalnya, `File baru terdeteksi`).
+
+    - Buka Command Prompt di `DrillHole_Automation`, ketik `python data_updater.py`, dan tekan Enter.
+    - Periksa log untuk konfirmasi (misalnya, `File baru terdeteksi`).
 
 2. **Tambahkan File Uji:**
-   - Salin `daily-data.xlsx` ke `Daily_Data` dan verifikasi pembaruan database, memeriksa log untuk keberhasilan atau error.
+
+      - Salin `daily-data.xlsx` ke `Daily_Data` dan verifikasi pembaruan database, memeriksa log untuk keberhasilan atau error.
 
 3. **Akses Dashboard:**
-   - Buka browser di `http://127.0.0.1:5000` untuk melihat statistik dan plot.
-   - Gunakan tautan sidebar untuk menguji `/update` dan `/database-status`.
 
-4. **Tangani Kesalahan:**
-   - **Masalah Metadata:** Jika `Missing or invalid metadata`, buka `daily-data.xlsx`, pastikan `B2` dan `J3` memiliki data, dan log nilai mentah untuk debugging.
-   - **Ketidaksesuaian Kolom:** Jika `KeyError`, log `daily_data.columns` dan sesuaikan `transform_data` untuk indeks atau header.
-   - **Error Matplotlib:** Jika `RuntimeError`, pastikan `matplotlib.use('Agg')` ada di awal skrip.
-   - **Error 405:** Jika `/update` gagal, verifikasi eror tersebut dengan melihat GET di dashboard.
+    - Buka browser di `http://127.0.0.1:5000` untuk melihat statistik dan plot.
+    - Gunakan tautan sidebar untuk menguji `/update` dan `/database-status`.
+
+4. **Solusi:**
+
+    - **Masalah Metadata:** Jika `Missing or invalid metadata`, buka `daily-data.xlsx`, pastikan `B2` dan `J3` memiliki data, dan log nilai mentah untuk debugging.
+    - **Ketidaksesuaian Kolom:** Jika `KeyError`, log `daily_data.columns` dan sesuaikan `transform_data` untuk indeks atau header.
+    - **Error Matplotlib:** Jika `RuntimeError`, pastikan `matplotlib.use('Agg')` ada di awal skrip.
+    - **Error 405:** Jika `/update` gagal, verifikasi eror tersebut dengan melihat GET di dashboard.
 
 ---
 
@@ -496,11 +516,13 @@ if __name__ == '__main__':
 Panduan ini diharapkan membantu Anda membuat, menguji, dan memelihara sistem automasi data pengeboran di lokal komputer, menangani kesalahan melalui logging dan penyesuaian dari format data harian ke format database. Sistem ini mengotomatisasi pembaruan, menyediakan dashboard untuk memantau data, dan beroperasi secara offline, ideal untuk lingkungan kerja lapangan yang terkendala akses internet.
 
 #### Peningkatan Potensial
+
 - Tambahkan validasi data untuk penanganan error yang lebih kuat.
 - Gunakan Plotly untuk visualisasi interaktif di dashboard.
 - Implementasikan cadangan terjadwal untuk `drilling_database.xlsx`.
 
 #### Referensi
+
 - [Dokumentasi Resmi Flask](https://flask.palletsprojects.com/en/2.0.x/)
 - [Library Watchdog Python](https://pythonhosted.org/watchdog/)
 - [Dokumentasi OpenPyXL](https://openpyxl.readthedocs.io/en/stable/)

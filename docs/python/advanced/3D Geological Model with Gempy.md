@@ -18,12 +18,15 @@ import gempy_viewer as gpv
 from pyvista import set_plot_theme
 set_plot_theme('document')
 ```
-- **Tujuan**: Menyiapkan environment dengan mengimpor library yang diperlukan dan mengatur konfigurasi.
-- **Langkah-langkah**:
+**Tujuan**: Menyiapkan environment dengan mengimpor library yang diperlukan dan mengatur konfigurasi.
+
+**Langkah-langkah**:
+
   - Mengatur variabel environment `DEFAULT_BACKEND` ke `"PYTORCH"` untuk perhitungan GemPy (PyTorch digunakan untuk operasi numerik yang lebih cepat).
   - Mengimpor `pandas` untuk penanganan data, `numpy` untuk operasi numerik, `gempy` untuk pemodelan geologi, dan `gempy_viewer` untuk visualisasi.
   - Mengatur tema plot PyVista ke `'document'` untuk tampilan bersih bergaya publikasi.
-- **Output**: Mencetak `"Setting Backend To: AvailableBackends.PYTORCH"`.
+
+**Output**: Mencetak `"Setting Backend To: AvailableBackends.PYTORCH"`.
 
 ---
 
@@ -37,15 +40,20 @@ assay = pd.read_csv('assay.csv')  # hole_id, from_depth, to_depth, nickel_grade
 
 print(collar.head(), survey.head(), lithology.head(), assay.head())
 ```
-- **Tujuan**: Memuat data drill hole dari file CSV dan menampilkan lima baris pertama dari setiap dataset.
-- **Langkah-langkah**:
+**Tujuan**: Memuat data drill hole dari file CSV dan menampilkan lima baris pertama dari setiap dataset.
+
+**Langkah-langkah**:
+ 
   - Memuat empat dataset:
+
     - `collar`: Lokasi collar drill hole (BHID, XCOLLAR, YCOLLAR, ZCOLLAR).
     - `survey`: Data survei drill hole (BHID, DEPTH, AZIMUTH, DIP).
     - `lithology`: Interval litologi (BHID, Fr., To, LITOLOGI).
     - `assay`: Data assay dengan kadar nikel (BHID, Fr., To, Total Ni, dll.).
+ 
   - Menggunakan `head()` dari `pandas` untuk melihat pratinjau data.
-- **Output**: Menampilkan contoh baris dari setiap DataFrame, menunjukkan ID drill hole, koordinat, kedalaman, kemiringan, azimuth, litologi (misalnya LIM), dan nilai assay (misalnya kadar nikel).
+
+**Output**: Menampilkan contoh baris dari setiap DataFrame, menunjukkan ID drill hole, koordinat, kedalaman, kemiringan, azimuth, litologi (misalnya LIM), dan nilai assay (misalnya kadar nikel).
 
 ---
 
@@ -58,11 +66,14 @@ assay = assay.rename(columns={'BHID': 'hole_id', 'Fr.': 'from_depth', 'To': 'to_
 
 print(collar.head(), survey.head(), lithology.head(), assay.head())
 ```
-- **Tujuan**: Menstandarkan nama kolom untuk konsistensi dan kompatibilitas dengan GemPy.
-- **Langkah-langkah**:
+**Tujuan**: Menstandarkan nama kolom untuk konsistensi dan kompatibilitas dengan GemPy.
+
+**Langkah-langkah**:
+
   - Mengganti nama kolom di setiap DataFrame menjadi nama yang konsisten dan deskriptif (misalnya, `BHID` → `hole_id`, `XCOLLAR` → `x`).
   - Mencetak DataFrame yang diperbarui untuk memastikan perubahan.
-- **Output**: Sama seperti Blok 2, tetapi dengan nama kolom yang diperbarui (misalnya, `hole_id`, `x`, `y`, `z`, dll.).
+
+**Output**: Sama seperti Blok 2, tetapi dengan nama kolom yang diperbarui (misalnya, `hole_id`, `x`, `y`, `z`, dll.).
 
 ---
 
@@ -123,14 +134,18 @@ def desurvey(hole_collar, hole_survey, depth_interval=1):
     
     return pd.DataFrame(desurveyed_points)
 ```
-- **Tujuan**: Mendefinisikan fungsi untuk menghitung koordinat 3D di sepanjang jalur drill hole berdasarkan data survei (kemiringan, azimuth, kedalaman).
-- **Langkah-langkah**:
+**Tujuan**: Mendefinisikan fungsi untuk menghitung koordinat 3D di sepanjang jalur drill hole berdasarkan data survei (kemiringan, azimuth, kedalaman).
+
+**Langkah-langkah**:
+
   - Mengambil `hole_collar` (titik awal) dan `hole_survey` (perubahan kemiringan, azimuth, kedalaman) sebagai masukan.
   - Mengurutkan data survei berdasarkan kedalaman dan mengiterasi melalui segmen-segmen.
   - Untuk setiap segmen:
+
     - Menghitung rata-rata kemiringan dan azimuth.
     - Mengonversi ke radian dan menghitung offset 3D (`delta_x`, `delta_y`, `delta_z`) menggunakan trigonometri.
     - Menginterpolasi titik pada interval 1 meter (`depth_interval=1`) antara kedalaman awal dan akhir.
+
   - Mengembalikan DataFrame dengan titik-titik desurvey (`depth`, `x`, `y`, `z`).
 
 #### **Bagian 4.2: Menerapkan Desurvey ke Semua drill hole**
@@ -146,15 +161,18 @@ for hole_id, hole_survey in survey_grouped:
     desurveyed_dict[hole_id] = desurveyed
 desurveyed_df = pd.concat(desurveyed_dict.values(), ignore_index=True)
 ```
-- **Tujuan**: Menerapkan fungsi desurvey ke semua drill hole dan menggabungkan hasilnya.
-- **Langkah-langkah**:
+**Tujuan**: Menerapkan fungsi desurvey ke semua drill hole dan menggabungkan hasilnya.
+
+**Langkah-langkah**:
+
   - Mengelompokkan data survei berdasarkan `hole_id`.
   - Untuk setiap drill hole:
     - Mengekstrak data collar-nya.
     - Memanggil `desurvey` untuk menghitung titik-titik 3D.
     - Menambahkan `hole_id` ke hasil dan menyimpannya dalam kamus.
   - Menggabungkan semua titik desurvey menjadi satu DataFrame (`desurveyed_df`).
-- **Output**: Tidak ada Output langsung; menghasilkan `desurveyed_df` dengan koordinat 3D untuk semua drill hole.
+
+**Output**: Tidak ada Output langsung; menghasilkan `desurveyed_df` dengan koordinat 3D untuk semua drill hole.
 
 ---
 
@@ -209,14 +227,18 @@ def process_lithology(hole_lithology):
     
     return pd.DataFrame(processed)
 ```
-- **Tujuan**: Memproses interval litologi untuk memastikan urutan stratigrafi dan menggabungkan unit yang sama secara berurutan.
-- **Langkah-langkah**:
+**Tujuan**: Memproses interval litologi untuk memastikan urutan stratigrafi dan menggabungkan unit yang sama secara berurutan.
+
+**Langkah-langkah**:
+
   - Mendefinisikan `strat_order` (LIM → SAP → BZ).
   - Mengurutkan data litologi berdasarkan kedalaman.
   - Mengiterasi melalui interval:
+
     - Menggabungkan interval berturut-turut dengan litologi yang sama.
     - Menyelesaikan unit yang tidak sesuai urutan (misalnya SAP di atas LIM) dengan mempertahankan unit yang lebih tebal.
     - Menambahkan lapisan tipis “Basement” di bagian bawah jika tidak ada.
+
   - Mengembalikan DataFrame dengan interval yang diproses.
 
 #### **Bagian 5.2: Menerapkan pengolahan dan Menyiapkan Titik Permukaan**
@@ -258,14 +280,18 @@ for hole_id, hole_lithology in processed_lithology.groupby('hole_id'):
 points_df = pd.DataFrame(surface_points)
 lim_top_df = pd.DataFrame(lim_top_points)
 ```
-- **Tujuan**: Menerapkan pengolahan litologi ke semua drill hole dan menyiapkan titik permukaan untuk pemodelan.
-- **Langkah-langkah**:
+**Tujuan**: Menerapkan pengolahan litologi ke semua drill hole dan menyiapkan titik permukaan untuk pemodelan.
+
+**Langkah-langkah**:
+
   - Mengelompokkan litologi berdasarkan `hole_id` dan memproses setiap kelompok.
   - Menggabungkan hasil menjadi `processed_lithology`.
   - Memetakan koordinat desurvey ke kedalaman litologi.
   - Membuat:
+
     - `surface_points`: Semua batas litologi dengan koordinat 3D.
     - `lim_top_points`: Titik-titik paling atas LIM untuk topografi.
+
   - Mengonversi ke DataFrame (`points_df`, `lim_top_df`).
 
 ---
@@ -298,13 +324,16 @@ gp.set_topography_from_arrays(
 
 print("Grid aktif:", geo_model.grid.active_grids)
 ```
-- **Tujuan**: Mengatur model geologi GemPy dengan luas dan topografi.
-- **Langkah-langkah**:
+**Tujuan**: Mengatur model geologi GemPy dengan luas dan topografi.
+
+**Langkah-langkah**:
+
   - Menentukan luas model berdasarkan koordinat minimum/maksimum dengan tambahan ruang.
   - Membuat `geo_model` dengan resolusi grid 20x20x20.
   - Menggunakan bagian atas LIM untuk menentukan topografi.
   - Mencetak grid aktif (misalnya, DENSE, TOPOGRAPHY).
-- **Output**: `"Grid aktif: GridTypes.DENSE|TOPOGRAPHY|NONE"`.
+
+**Output**: `"Grid aktif: GridTypes.DENSE|TOPOGRAPHY|NONE"`.
 
 ---
 
@@ -334,8 +363,10 @@ for i, lith in enumerate(unique_lithologies):
 geo_model.structural_frame.structural_groups[0].elements = elements
 geo_model.structural_frame.structural_groups[0].name = 'Stratigraphic_Series'
 ```
-- **Tujuan**: Menentukan lapisan stratigrafi (LIM, SAP, BZ) untuk model.
-- **Langkah-langkah**:
+**Tujuan**: Menentukan lapisan stratigrafi (LIM, SAP, BZ) untuk model.
+
+**Langkah-langkah**:
+
   - Menetapkan warna untuk setiap litologi.
   - Membuat objek `StructuralElement` dengan titik permukaan untuk setiap litologi.
   - Menambahkan elemen ke kerangka struktural model sebagai seri stratigrafi.
@@ -357,8 +388,10 @@ gp.add_orientations(
     pole_vector=[np.array([0, 0, 1])]
 )
 ```
-- **Tujuan**: Menambahkan satu orientasi untuk mengasumsikan lapisan datar.
-- **Langkah-langkah**:
+**Tujuan**: Menambahkan satu orientasi untuk mengasumsikan lapisan datar.
+
+**Langkah-langkah**:
+
   - Menghitung centroid dari semua titik permukaan.
   - Menambahkan orientasi di centroid untuk LIM dengan vektor kutub vertikal (lapisan datar).
 
@@ -368,7 +401,7 @@ gp.add_orientations(
 ```python
 geo_model.update_transform(gp.data.GlobalAnisotropy.NONE)
 ```
-- **Tujuan**: Menyederhanakan model dengan menonaktifkan anisotropi global (mengasumsikan perilaku lapisan seragam).
+**Tujuan**: Menyederhanakan model dengan menonaktifkan anisotropi global (mengasumsikan perilaku lapisan seragam).
 
 ---
 
@@ -376,10 +409,13 @@ geo_model.update_transform(gp.data.GlobalAnisotropy.NONE)
 ```python
 gp.compute_model(geo_model, engine_config=gp.data.GemPyEngineConfig(dtype='float64'))
 ```
-- **Tujuan**: Menjalankan interpolasi geologi untuk menghitung model 3D.
-- **Langkah-langkah**:
+**Tujuan**: Menjalankan interpolasi geologi untuk menghitung model 3D.
+
+**Langkah-langkah**:
+
   - Menggunakan PyTorch dengan presisi 64-bit untuk perhitungan.
-- **Output**: `"Solusi: 4 Tingkat Octree, 3 Mesh DualContouring"`.
+
+**Output**: `"Solusi: 4 Tingkat Octree, 3 Mesh DualContouring"`.
 
 ---
 
@@ -387,12 +423,15 @@ gp.compute_model(geo_model, engine_config=gp.data.GemPyEngineConfig(dtype='float
 ```python
 gpv.plot_2d(geo_model, cell_number='mid', direction='y', show_data=False, show_results=True)
 ```
-- **Tujuan**: Memplot penampang 2D melalui tengah model sepanjang sumbu Y.
-- **Langkah-langkah**:
-  - Memvisualisasikan model yang dihitung tanpa titik data mentah.
-- **Output**: Menampilkan plot 2D (gambar disertakan dalam notebook).
+**Tujuan**: Memplot penampang 2D melalui tengah model sepanjang sumbu Y.
 
-__Output__
+**Langkah-langkah**:
+
+  - Memvisualisasikan model yang dihitung tanpa titik data mentah.
+
+**Output**: Menampilkan plot 2D (gambar disertakan dalam notebook).
+
+__Output:__
 ![Geological Tool](../../extra/assets/images/gempy_penampang_3D_geo.png)
 ---
 
@@ -407,17 +446,21 @@ plotter = gpv.plot_3d(
     kwargs_plot_structured_grid={'opacity': 0.8, 'lighting': True}
 )
 ```
-- **Tujuan**: Membuat visualisasi 3D dari model.
-- **Langkah-langkah**:
+**Tujuan**: Membuat visualisasi 3D dari model.
+
+**Langkah-langkah**:
+
   - Menampilkan permukaan litologi dan topografi dengan opasitas 80% dan efek pencahayaan.
   - Menggunakan plotter dasar untuk performa.
 
-__Output__
+__Output:__
 ![Geological Tool](../../extra/assets/images/gempy_3D_model.png)
 ---
 
 ### **Ringkasan**
-Notebook ini memproses data drill hole untuk mengolah dan memvisualisasikan model geologi 3D dari data pertambangan nikel laterit. Langkah-langkah-langkah meliputi:
+
+Panduan ini megolah data drill hole untuk memvisualisasikan model geologi 3D dari data pertambangan nikel laterit. Langkah-langkah meliputi:
+
 1. Memuat dan menyiapkan data.
 2. Melakukan desurvey drill hole untuk mendapatkan koordinat 3D.
 3. Memproses litologi untuk memastikan urutan stratigrafi.
