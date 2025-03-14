@@ -9,7 +9,7 @@
       
       
       
-        <link rel="prev" href="../../intermediate/none/">
+        <link rel="prev" href="../Data%20Automation%20for%20DrillHole%20Database/">
       
       
         <link rel="next" href="../../../geology/geology%20structure/none/">
@@ -319,11 +319,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../../basics/Basic%20Geology%20Tools/" class="md-nav__link">
+      <a href="../../basics/Membuat%20Topo%20dari%20Data%20Koordinat/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    Basic Geology Tools
+    Membuat Topo dari Data Koordinat
     
   </span>
   
@@ -453,7 +453,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Automation for DrillHole Database.md" class="md-nav__link">
+      <a href="../Data%20Automation%20for%20DrillHole%20Database/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -912,6 +912,27 @@
   
 
     
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../support/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Support by
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -1145,12 +1166,14 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">pyvista</span><span class="w"> </span><span class="kn">import</span> <span class="n">set_plot_theme</span>
 <span class="n">set_plot_theme</span><span class="p">(</span><span class="s1">&#39;document&#39;</span><span class="p">)</span>
 </code></pre></div>
-- <strong>Tujuan</strong>: Menyiapkan environment dengan mengimpor library yang diperlukan dan mengatur konfigurasi.
-- <strong>Langkah-langkah</strong>:
-  - Mengatur variabel environment <code>DEFAULT_BACKEND</code> ke <code>"PYTORCH"</code> untuk perhitungan GemPy (PyTorch digunakan untuk operasi numerik yang lebih cepat).
-  - Mengimpor <code>pandas</code> untuk penanganan data, <code>numpy</code> untuk operasi numerik, <code>gempy</code> untuk pemodelan geologi, dan <code>gempy_viewer</code> untuk visualisasi.
-  - Mengatur tema plot PyVista ke <code>'document'</code> untuk tampilan bersih bergaya publikasi.
-- <strong>Output</strong>: Mencetak <code>"Setting Backend To: AvailableBackends.PYTORCH"</code>.</p>
+<strong>Tujuan</strong>: Menyiapkan environment dengan mengimpor library yang diperlukan dan mengatur konfigurasi.</p>
+<p><strong>Langkah-langkah</strong>:</p>
+<ul>
+<li>Mengatur variabel environment <code>DEFAULT_BACKEND</code> ke <code>"PYTORCH"</code> untuk perhitungan GemPy (PyTorch digunakan untuk operasi numerik yang lebih cepat).</li>
+<li>Mengimpor <code>pandas</code> untuk penanganan data, <code>numpy</code> untuk operasi numerik, <code>gempy</code> untuk pemodelan geologi, dan <code>gempy_viewer</code> untuk visualisasi.</li>
+<li>Mengatur tema plot PyVista ke <code>'document'</code> untuk tampilan bersih bergaya publikasi.</li>
+</ul>
+<p><strong>Output</strong>: Mencetak <code>"Setting Backend To: AvailableBackends.PYTORCH"</code>.</p>
 <hr />
 <h3 id="blok-2-memuat-dan-menampilkan-data"><strong>Blok 2: Memuat dan Menampilkan Data</strong></h3>
 <p><div class="highlight"><pre><span></span><code><span class="c1"># Memuat data Anda</span>
@@ -1161,15 +1184,23 @@
 
 <span class="nb">print</span><span class="p">(</span><span class="n">collar</span><span class="o">.</span><span class="n">head</span><span class="p">(),</span> <span class="n">survey</span><span class="o">.</span><span class="n">head</span><span class="p">(),</span> <span class="n">lithology</span><span class="o">.</span><span class="n">head</span><span class="p">(),</span> <span class="n">assay</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
 </code></pre></div>
-- <strong>Tujuan</strong>: Memuat data drill hole dari file CSV dan menampilkan lima baris pertama dari setiap dataset.
-- <strong>Langkah-langkah</strong>:
-  - Memuat empat dataset:
-    - <code>collar</code>: Lokasi collar drill hole (BHID, XCOLLAR, YCOLLAR, ZCOLLAR).
-    - <code>survey</code>: Data survei drill hole (BHID, DEPTH, AZIMUTH, DIP).
-    - <code>lithology</code>: Interval litologi (BHID, Fr., To, LITOLOGI).
-    - <code>assay</code>: Data assay dengan kadar nikel (BHID, Fr., To, Total Ni, dll.).
-  - Menggunakan <code>head()</code> dari <code>pandas</code> untuk melihat pratinjau data.
-- <strong>Output</strong>: Menampilkan contoh baris dari setiap DataFrame, menunjukkan ID drill hole, koordinat, kedalaman, kemiringan, azimuth, litologi (misalnya LIM), dan nilai assay (misalnya kadar nikel).</p>
+<strong>Tujuan</strong>: Memuat data drill hole dari file CSV dan menampilkan lima baris pertama dari setiap dataset.</p>
+<p><strong>Langkah-langkah</strong>:</p>
+<ul>
+<li>
+<p>Memuat empat dataset:</p>
+<ul>
+<li><code>collar</code>: Lokasi collar drill hole (BHID, XCOLLAR, YCOLLAR, ZCOLLAR).</li>
+<li><code>survey</code>: Data survei drill hole (BHID, DEPTH, AZIMUTH, DIP).</li>
+<li><code>lithology</code>: Interval litologi (BHID, Fr., To, LITOLOGI).</li>
+<li><code>assay</code>: Data assay dengan kadar nikel (BHID, Fr., To, Total Ni, dll.).</li>
+</ul>
+</li>
+<li>
+<p>Menggunakan <code>head()</code> dari <code>pandas</code> untuk melihat pratinjau data.</p>
+</li>
+</ul>
+<p><strong>Output</strong>: Menampilkan contoh baris dari setiap DataFrame, menunjukkan ID drill hole, koordinat, kedalaman, kemiringan, azimuth, litologi (misalnya LIM), dan nilai assay (misalnya kadar nikel).</p>
 <hr />
 <h3 id="blok-3-mengganti-nama-kolom"><strong>Blok 3: Mengganti Nama Kolom</strong></h3>
 <p><div class="highlight"><pre><span></span><code><span class="n">collar</span> <span class="o">=</span> <span class="n">collar</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;BHID&#39;</span><span class="p">:</span> <span class="s1">&#39;hole_id&#39;</span><span class="p">,</span> <span class="s1">&#39;YCOLLAR&#39;</span><span class="p">:</span> <span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="s1">&#39;XCOLLAR&#39;</span><span class="p">:</span> <span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;ZCOLLAR&#39;</span><span class="p">:</span> <span class="s1">&#39;z&#39;</span><span class="p">})</span>
@@ -1179,11 +1210,13 @@
 
 <span class="nb">print</span><span class="p">(</span><span class="n">collar</span><span class="o">.</span><span class="n">head</span><span class="p">(),</span> <span class="n">survey</span><span class="o">.</span><span class="n">head</span><span class="p">(),</span> <span class="n">lithology</span><span class="o">.</span><span class="n">head</span><span class="p">(),</span> <span class="n">assay</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
 </code></pre></div>
-- <strong>Tujuan</strong>: Menstandarkan nama kolom untuk konsistensi dan kompatibilitas dengan GemPy.
-- <strong>Langkah-langkah</strong>:
-  - Mengganti nama kolom di setiap DataFrame menjadi nama yang konsisten dan deskriptif (misalnya, <code>BHID</code> → <code>hole_id</code>, <code>XCOLLAR</code> → <code>x</code>).
-  - Mencetak DataFrame yang diperbarui untuk memastikan perubahan.
-- <strong>Output</strong>: Sama seperti Blok 2, tetapi dengan nama kolom yang diperbarui (misalnya, <code>hole_id</code>, <code>x</code>, <code>y</code>, <code>z</code>, dll.).</p>
+<strong>Tujuan</strong>: Menstandarkan nama kolom untuk konsistensi dan kompatibilitas dengan GemPy.</p>
+<p><strong>Langkah-langkah</strong>:</p>
+<ul>
+<li>Mengganti nama kolom di setiap DataFrame menjadi nama yang konsisten dan deskriptif (misalnya, <code>BHID</code> → <code>hole_id</code>, <code>XCOLLAR</code> → <code>x</code>).</li>
+<li>Mencetak DataFrame yang diperbarui untuk memastikan perubahan.</li>
+</ul>
+<p><strong>Output</strong>: Sama seperti Blok 2, tetapi dengan nama kolom yang diperbarui (misalnya, <code>hole_id</code>, <code>x</code>, <code>y</code>, <code>z</code>, dll.).</p>
 <hr />
 <h3 id="blok-4-desurvey-drill-hole"><strong>Blok 4: Desurvey drill hole</strong></h3>
 <p>Blok ini panjang, jadi saya akan membaginya menjadi dua bagian untuk kejelasan.</p>
@@ -1240,15 +1273,23 @@
 
     <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">desurveyed_points</span><span class="p">)</span>
 </code></pre></div>
-- <strong>Tujuan</strong>: Mendefinisikan fungsi untuk menghitung koordinat 3D di sepanjang jalur drill hole berdasarkan data survei (kemiringan, azimuth, kedalaman).
-- <strong>Langkah-langkah</strong>:
-  - Mengambil <code>hole_collar</code> (titik awal) dan <code>hole_survey</code> (perubahan kemiringan, azimuth, kedalaman) sebagai masukan.
-  - Mengurutkan data survei berdasarkan kedalaman dan mengiterasi melalui segmen-segmen.
-  - Untuk setiap segmen:
-    - Menghitung rata-rata kemiringan dan azimuth.
-    - Mengonversi ke radian dan menghitung offset 3D (<code>delta_x</code>, <code>delta_y</code>, <code>delta_z</code>) menggunakan trigonometri.
-    - Menginterpolasi titik pada interval 1 meter (<code>depth_interval=1</code>) antara kedalaman awal dan akhir.
-  - Mengembalikan DataFrame dengan titik-titik desurvey (<code>depth</code>, <code>x</code>, <code>y</code>, <code>z</code>).</p>
+<strong>Tujuan</strong>: Mendefinisikan fungsi untuk menghitung koordinat 3D di sepanjang jalur drill hole berdasarkan data survei (kemiringan, azimuth, kedalaman).</p>
+<p><strong>Langkah-langkah</strong>:</p>
+<ul>
+<li>Mengambil <code>hole_collar</code> (titik awal) dan <code>hole_survey</code> (perubahan kemiringan, azimuth, kedalaman) sebagai masukan.</li>
+<li>Mengurutkan data survei berdasarkan kedalaman dan mengiterasi melalui segmen-segmen.</li>
+<li>
+<p>Untuk setiap segmen:</p>
+<ul>
+<li>Menghitung rata-rata kemiringan dan azimuth.</li>
+<li>Mengonversi ke radian dan menghitung offset 3D (<code>delta_x</code>, <code>delta_y</code>, <code>delta_z</code>) menggunakan trigonometri.</li>
+<li>Menginterpolasi titik pada interval 1 meter (<code>depth_interval=1</code>) antara kedalaman awal dan akhir.</li>
+</ul>
+</li>
+<li>
+<p>Mengembalikan DataFrame dengan titik-titik desurvey (<code>depth</code>, <code>x</code>, <code>y</code>, <code>z</code>).</p>
+</li>
+</ul>
 <h4 id="bagian-42-menerapkan-desurvey-ke-semua-drill-hole"><strong>Bagian 4.2: Menerapkan Desurvey ke Semua drill hole</strong></h4>
 <p><div class="highlight"><pre><span></span><code><span class="n">survey_grouped</span> <span class="o">=</span> <span class="n">survey</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;hole_id&#39;</span><span class="p">)</span>
 <span class="n">desurveyed_dict</span> <span class="o">=</span> <span class="p">{}</span>
@@ -1261,15 +1302,19 @@
     <span class="n">desurveyed_dict</span><span class="p">[</span><span class="n">hole_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">desurveyed</span>
 <span class="n">desurveyed_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">desurveyed_dict</span><span class="o">.</span><span class="n">values</span><span class="p">(),</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </code></pre></div>
-- <strong>Tujuan</strong>: Menerapkan fungsi desurvey ke semua drill hole dan menggabungkan hasilnya.
-- <strong>Langkah-langkah</strong>:
-  - Mengelompokkan data survei berdasarkan <code>hole_id</code>.
-  - Untuk setiap drill hole:
-    - Mengekstrak data collar-nya.
-    - Memanggil <code>desurvey</code> untuk menghitung titik-titik 3D.
-    - Menambahkan <code>hole_id</code> ke hasil dan menyimpannya dalam kamus.
-  - Menggabungkan semua titik desurvey menjadi satu DataFrame (<code>desurveyed_df</code>).
-- <strong>Output</strong>: Tidak ada Output langsung; menghasilkan <code>desurveyed_df</code> dengan koordinat 3D untuk semua drill hole.</p>
+<strong>Tujuan</strong>: Menerapkan fungsi desurvey ke semua drill hole dan menggabungkan hasilnya.</p>
+<p><strong>Langkah-langkah</strong>:</p>
+<ul>
+<li>Mengelompokkan data survei berdasarkan <code>hole_id</code>.</li>
+<li>Untuk setiap drill hole:<ul>
+<li>Mengekstrak data collar-nya.</li>
+<li>Memanggil <code>desurvey</code> untuk menghitung titik-titik 3D.</li>
+<li>Menambahkan <code>hole_id</code> ke hasil dan menyimpannya dalam kamus.</li>
+</ul>
+</li>
+<li>Menggabungkan semua titik desurvey menjadi satu DataFrame (<code>desurveyed_df</code>).</li>
+</ul>
+<p><strong>Output</strong>: Tidak ada Output langsung; menghasilkan <code>desurveyed_df</code> dengan koordinat 3D untuk semua drill hole.</p>
 <hr />
 <h3 id="blok-5-memproses-litologi"><strong>Blok 5: Memproses Litologi</strong></h3>
 <p>Blok ini juga panjang, jadi saya akan membaginya menjadi beberapa bagian.</p>
@@ -1320,15 +1365,23 @@
 
     <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">processed</span><span class="p">)</span>
 </code></pre></div>
-- <strong>Tujuan</strong>: Memproses interval litologi untuk memastikan urutan stratigrafi dan menggabungkan unit yang sama secara berurutan.
-- <strong>Langkah-langkah</strong>:
-  - Mendefinisikan <code>strat_order</code> (LIM → SAP → BZ).
-  - Mengurutkan data litologi berdasarkan kedalaman.
-  - Mengiterasi melalui interval:
-    - Menggabungkan interval berturut-turut dengan litologi yang sama.
-    - Menyelesaikan unit yang tidak sesuai urutan (misalnya SAP di atas LIM) dengan mempertahankan unit yang lebih tebal.
-    - Menambahkan lapisan tipis “Basement” di bagian bawah jika tidak ada.
-  - Mengembalikan DataFrame dengan interval yang diproses.</p>
+<strong>Tujuan</strong>: Memproses interval litologi untuk memastikan urutan stratigrafi dan menggabungkan unit yang sama secara berurutan.</p>
+<p><strong>Langkah-langkah</strong>:</p>
+<ul>
+<li>Mendefinisikan <code>strat_order</code> (LIM → SAP → BZ).</li>
+<li>Mengurutkan data litologi berdasarkan kedalaman.</li>
+<li>
+<p>Mengiterasi melalui interval:</p>
+<ul>
+<li>Menggabungkan interval berturut-turut dengan litologi yang sama.</li>
+<li>Menyelesaikan unit yang tidak sesuai urutan (misalnya SAP di atas LIM) dengan mempertahankan unit yang lebih tebal.</li>
+<li>Menambahkan lapisan tipis “Basement” di bagian bawah jika tidak ada.</li>
+</ul>
+</li>
+<li>
+<p>Mengembalikan DataFrame dengan interval yang diproses.</p>
+</li>
+</ul>
 <h4 id="bagian-52-menerapkan-pengolahan-dan-menyiapkan-titik-permukaan"><strong>Bagian 5.2: Menerapkan pengolahan dan Menyiapkan Titik Permukaan</strong></h4>
 <p><div class="highlight"><pre><span></span><code><span class="c1"># Menerapkan ke semua lubang</span>
 <span class="n">lithology_grouped</span> <span class="o">=</span> <span class="n">lithology</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;hole_id&#39;</span><span class="p">)</span>
@@ -1367,15 +1420,23 @@
 <span class="n">points_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">surface_points</span><span class="p">)</span>
 <span class="n">lim_top_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">lim_top_points</span><span class="p">)</span>
 </code></pre></div>
-- <strong>Tujuan</strong>: Menerapkan pengolahan litologi ke semua drill hole dan menyiapkan titik permukaan untuk pemodelan.
-- <strong>Langkah-langkah</strong>:
-  - Mengelompokkan litologi berdasarkan <code>hole_id</code> dan memproses setiap kelompok.
-  - Menggabungkan hasil menjadi <code>processed_lithology</code>.
-  - Memetakan koordinat desurvey ke kedalaman litologi.
-  - Membuat:
-    - <code>surface_points</code>: Semua batas litologi dengan koordinat 3D.
-    - <code>lim_top_points</code>: Titik-titik paling atas LIM untuk topografi.
-  - Mengonversi ke DataFrame (<code>points_df</code>, <code>lim_top_df</code>).</p>
+<strong>Tujuan</strong>: Menerapkan pengolahan litologi ke semua drill hole dan menyiapkan titik permukaan untuk pemodelan.</p>
+<p><strong>Langkah-langkah</strong>:</p>
+<ul>
+<li>Mengelompokkan litologi berdasarkan <code>hole_id</code> dan memproses setiap kelompok.</li>
+<li>Menggabungkan hasil menjadi <code>processed_lithology</code>.</li>
+<li>Memetakan koordinat desurvey ke kedalaman litologi.</li>
+<li>
+<p>Membuat:</p>
+<ul>
+<li><code>surface_points</code>: Semua batas litologi dengan koordinat 3D.</li>
+<li><code>lim_top_points</code>: Titik-titik paling atas LIM untuk topografi.</li>
+</ul>
+</li>
+<li>
+<p>Mengonversi ke DataFrame (<code>points_df</code>, <code>lim_top_df</code>).</p>
+</li>
+</ul>
 <hr />
 <h3 id="blok-6-menginisialisasi-model-geologi"><strong>Blok 6: Menginisialisasi Model Geologi</strong></h3>
 <p><div class="highlight"><pre><span></span><code><span class="n">all_x</span> <span class="o">=</span> <span class="n">points_df</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
@@ -1404,13 +1465,15 @@
 
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Grid aktif:&quot;</span><span class="p">,</span> <span class="n">geo_model</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">active_grids</span><span class="p">)</span>
 </code></pre></div>
-- <strong>Tujuan</strong>: Mengatur model geologi GemPy dengan luas dan topografi.
-- <strong>Langkah-langkah</strong>:
-  - Menentukan luas model berdasarkan koordinat minimum/maksimum dengan tambahan ruang.
-  - Membuat <code>geo_model</code> dengan resolusi grid 20x20x20.
-  - Menggunakan bagian atas LIM untuk menentukan topografi.
-  - Mencetak grid aktif (misalnya, DENSE, TOPOGRAPHY).
-- <strong>Output</strong>: <code>"Grid aktif: GridTypes.DENSE|TOPOGRAPHY|NONE"</code>.</p>
+<strong>Tujuan</strong>: Mengatur model geologi GemPy dengan luas dan topografi.</p>
+<p><strong>Langkah-langkah</strong>:</p>
+<ul>
+<li>Menentukan luas model berdasarkan koordinat minimum/maksimum dengan tambahan ruang.</li>
+<li>Membuat <code>geo_model</code> dengan resolusi grid 20x20x20.</li>
+<li>Menggunakan bagian atas LIM untuk menentukan topografi.</li>
+<li>Mencetak grid aktif (misalnya, DENSE, TOPOGRAPHY).</li>
+</ul>
+<p><strong>Output</strong>: <code>"Grid aktif: GridTypes.DENSE|TOPOGRAPHY|NONE"</code>.</p>
 <hr />
 <h3 id="blok-7-mendefinisikan-elemen-struktural"><strong>Blok 7: Mendefinisikan Elemen Struktural</strong></h3>
 <p><div class="highlight"><pre><span></span><code><span class="n">unique_lithologies</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;LIM&#39;</span><span class="p">,</span> <span class="s1">&#39;SAP&#39;</span><span class="p">,</span> <span class="s1">&#39;BZ&#39;</span><span class="p">]</span>  <span class="c1"># Menyertakan Basement secara eksplisit</span>
@@ -1437,11 +1500,13 @@
 <span class="n">geo_model</span><span class="o">.</span><span class="n">structural_frame</span><span class="o">.</span><span class="n">structural_groups</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">elements</span> <span class="o">=</span> <span class="n">elements</span>
 <span class="n">geo_model</span><span class="o">.</span><span class="n">structural_frame</span><span class="o">.</span><span class="n">structural_groups</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;Stratigraphic_Series&#39;</span>
 </code></pre></div>
-- <strong>Tujuan</strong>: Menentukan lapisan stratigrafi (LIM, SAP, BZ) untuk model.
-- <strong>Langkah-langkah</strong>:
-  - Menetapkan warna untuk setiap litologi.
-  - Membuat objek <code>StructuralElement</code> dengan titik permukaan untuk setiap litologi.
-  - Menambahkan elemen ke kerangka struktural model sebagai seri stratigrafi.</p>
+<strong>Tujuan</strong>: Menentukan lapisan stratigrafi (LIM, SAP, BZ) untuk model.</p>
+<p><strong>Langkah-langkah</strong>:</p>
+<ul>
+<li>Menetapkan warna untuk setiap litologi.</li>
+<li>Membuat objek <code>StructuralElement</code> dengan titik permukaan untuk setiap litologi.</li>
+<li>Menambahkan elemen ke kerangka struktural model sebagai seri stratigrafi.</li>
+</ul>
 <hr />
 <h3 id="blok-8-menambahkan-orientasi"><strong>Blok 8: Menambahkan Orientasi</strong></h3>
 <p><div class="highlight"><pre><span></span><code><span class="n">centroid_x</span> <span class="o">=</span> <span class="n">points_df</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
@@ -1457,32 +1522,38 @@
     <span class="n">pole_vector</span><span class="o">=</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])]</span>
 <span class="p">)</span>
 </code></pre></div>
-- <strong>Tujuan</strong>: Menambahkan satu orientasi untuk mengasumsikan lapisan datar.
-- <strong>Langkah-langkah</strong>:
-  - Menghitung centroid dari semua titik permukaan.
-  - Menambahkan orientasi di centroid untuk LIM dengan vektor kutub vertikal (lapisan datar).</p>
+<strong>Tujuan</strong>: Menambahkan satu orientasi untuk mengasumsikan lapisan datar.</p>
+<p><strong>Langkah-langkah</strong>:</p>
+<ul>
+<li>Menghitung centroid dari semua titik permukaan.</li>
+<li>Menambahkan orientasi di centroid untuk LIM dengan vektor kutub vertikal (lapisan datar).</li>
+</ul>
 <hr />
 <h3 id="blok-9-menonaktifkan-anisotropi"><strong>Blok 9: Menonaktifkan Anisotropi</strong></h3>
 <p><div class="highlight"><pre><span></span><code><span class="n">geo_model</span><span class="o">.</span><span class="n">update_transform</span><span class="p">(</span><span class="n">gp</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">GlobalAnisotropy</span><span class="o">.</span><span class="n">NONE</span><span class="p">)</span>
 </code></pre></div>
-- <strong>Tujuan</strong>: Menyederhanakan model dengan menonaktifkan anisotropi global (mengasumsikan perilaku lapisan seragam).</p>
+<strong>Tujuan</strong>: Menyederhanakan model dengan menonaktifkan anisotropi global (mengasumsikan perilaku lapisan seragam).</p>
 <hr />
 <h3 id="blok-10-menghitung-model"><strong>Blok 10: Menghitung Model</strong></h3>
 <p><div class="highlight"><pre><span></span><code><span class="n">gp</span><span class="o">.</span><span class="n">compute_model</span><span class="p">(</span><span class="n">geo_model</span><span class="p">,</span> <span class="n">engine_config</span><span class="o">=</span><span class="n">gp</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">GemPyEngineConfig</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;float64&#39;</span><span class="p">))</span>
 </code></pre></div>
-- <strong>Tujuan</strong>: Menjalankan interpolasi geologi untuk menghitung model 3D.
-- <strong>Langkah-langkah</strong>:
-  - Menggunakan PyTorch dengan presisi 64-bit untuk perhitungan.
-- <strong>Output</strong>: <code>"Solusi: 4 Tingkat Octree, 3 Mesh DualContouring"</code>.</p>
+<strong>Tujuan</strong>: Menjalankan interpolasi geologi untuk menghitung model 3D.</p>
+<p><strong>Langkah-langkah</strong>:</p>
+<ul>
+<li>Menggunakan PyTorch dengan presisi 64-bit untuk perhitungan.</li>
+</ul>
+<p><strong>Output</strong>: <code>"Solusi: 4 Tingkat Octree, 3 Mesh DualContouring"</code>.</p>
 <hr />
 <h3 id="blok-11-visualisasi-2d"><strong>Blok 11: Visualisasi 2D</strong></h3>
 <p><div class="highlight"><pre><span></span><code><span class="n">gpv</span><span class="o">.</span><span class="n">plot_2d</span><span class="p">(</span><span class="n">geo_model</span><span class="p">,</span> <span class="n">cell_number</span><span class="o">=</span><span class="s1">&#39;mid&#39;</span><span class="p">,</span> <span class="n">direction</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="n">show_data</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">show_results</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </code></pre></div>
-- <strong>Tujuan</strong>: Memplot penampang 2D melalui tengah model sepanjang sumbu Y.
-- <strong>Langkah-langkah</strong>:
-  - Memvisualisasikan model yang dihitung tanpa titik data mentah.
-- <strong>Output</strong>: Menampilkan plot 2D (gambar disertakan dalam notebook).</p>
-<p><strong>Output</strong>
+<strong>Tujuan</strong>: Memplot penampang 2D melalui tengah model sepanjang sumbu Y.</p>
+<p><strong>Langkah-langkah</strong>:</p>
+<ul>
+<li>Memvisualisasikan model yang dihitung tanpa titik data mentah.</li>
+</ul>
+<p><strong>Output</strong>: Menampilkan plot 2D (gambar disertakan dalam notebook).</p>
+<p><strong>Output:</strong>
 <img alt="Geological Tool" src="../../../extra/assets/images/gempy_penampang_3D_geo.png" /></p>
 <hr />
 <h3 id="blok-12-visualisasi-3d"><strong>Blok 12: Visualisasi 3D</strong></h3>
@@ -1495,20 +1566,24 @@
     <span class="n">kwargs_plot_structured_grid</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;opacity&#39;</span><span class="p">:</span> <span class="mf">0.8</span><span class="p">,</span> <span class="s1">&#39;lighting&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">}</span>
 <span class="p">)</span>
 </code></pre></div>
-- <strong>Tujuan</strong>: Membuat visualisasi 3D dari model.
-- <strong>Langkah-langkah</strong>:
-  - Menampilkan permukaan litologi dan topografi dengan opasitas 80% dan efek pencahayaan.
-  - Menggunakan plotter dasar untuk performa.</p>
-<p><strong>Output</strong>
+<strong>Tujuan</strong>: Membuat visualisasi 3D dari model.</p>
+<p><strong>Langkah-langkah</strong>:</p>
+<ul>
+<li>Menampilkan permukaan litologi dan topografi dengan opasitas 80% dan efek pencahayaan.</li>
+<li>Menggunakan plotter dasar untuk performa.</li>
+</ul>
+<p><strong>Output:</strong>
 <img alt="Geological Tool" src="../../../extra/assets/images/gempy_3D_model.png" /></p>
 <hr />
 <h3 id="ringkasan"><strong>Ringkasan</strong></h3>
-<p>Notebook ini memproses data drill hole untuk mengolah dan memvisualisasikan model geologi 3D dari data pertambangan nikel laterit. Langkah-langkah-langkah meliputi:
-1. Memuat dan menyiapkan data.
-2. Melakukan desurvey drill hole untuk mendapatkan koordinat 3D.
-3. Memproses litologi untuk memastikan urutan stratigrafi.
-4. Mengatur model GemPy dengan topografi dan elemen struktural.
-5. Menghitung dan memvisualisasikan model dalam 2D dan 3D.</p>
+<p>Panduan ini megolah data drill hole untuk memvisualisasikan model geologi 3D dari data pertambangan nikel laterit. Langkah-langkah meliputi:</p>
+<ol>
+<li>Memuat dan menyiapkan data.</li>
+<li>Melakukan desurvey drill hole untuk mendapatkan koordinat 3D.</li>
+<li>Memproses litologi untuk memastikan urutan stratigrafi.</li>
+<li>Mengatur model GemPy dengan topografi dan elemen struktural.</li>
+<li>Menghitung dan memvisualisasikan model dalam 2D dan 3D.</li>
+</ol>
 
 
 
@@ -1534,28 +1609,35 @@
         <footer class="md-footer">
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
-      <div class="footer-social">
-        <a href="https://github.com/FaisalAmal" target="_blank">
-          <span class="twemoji github">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
-          </span>
-          <span class="label">GitHub</span>
-        </a>
-        <a href="mailto:your.email@example.com">
-          <span class="twemoji email">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4l217.6 163.2c11.4 8.5 27 8.5 38.4 0l217.6-163.2c12.1-9.1 19.2-23.3 19.2-38.4 0-26.5-21.5-48-48-48zM0 176v208c0 35.3 28.7 64 64 64h384c35.3 0 64-28.7 64-64V176L294.4 339.2a63.9 63.9 0 0 1-76.8 0z"/></svg>
-          </span>
-          <span class="label">Email</span>
-        </a>
-        <a href="https://linkedin.com/in/faisal-amal-974004202" target="_blank">
-          <span class="twemoji linkedin">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3M135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5m282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9z"/></svg>
-          </span>
-          <span class="label">LinkedIn</span>
-        </a>
+      <div class="footer-left">
+        <div class="footer-general">
+          <p>For general inquiries or support, feel free to contact us.</p>
+        </div>
+        <div class="footer-social">
+          <a href="https://github.com/FaisalAmal" target="_blank">
+            <span class="twemoji github">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+            </span>
+            <span class="label">GitHub</span>
+          </a>
+          <a href="mailto:your.email@example.com">
+            <span class="twemoji email">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4l217.6 163.2c11.4 8.5 27 8.5 38.4 0l217.6-163.2c12.1-9.1 19.2-23.3 19.2-38.4 0-26.5-21.5-48-48-48zM0 176v208c0 35.3 28.7 64 64 64h384c35.3 0 64-28.7 64-64V176L294.4 339.2a63.9 63.9 0 0 1-76.8 0z"/></svg>
+            </span>
+            <span class="label">Email</span>
+          </a>
+          <a href="https://linkedin.com/in/faisal-amal-974004202" target="_blank">
+            <span class="twemoji linkedin">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3M135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5m282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9z"/></svg>
+            </span>
+            <span class="label">LinkedIn</span>
+          </a>
+        </div>
       </div>
-      <div class="md-footer-copyright">
-        © 2025 GeoPython Learn | Powered by MkDocs & Material for MkDocs
+      <div class="footer-right">
+        <div class="footer-copyright">
+          © 2025 GeoPython Learn | Powered by MkDocs & Material for MkDocs
+        </div>
       </div>
     </div>
   </div>
